@@ -1,0 +1,615 @@
+import java.util.*;
+class Node{
+    int val;
+    Node next;
+    Node(){
+        this.val = 0;
+        this.next = null;
+    }
+    Node(int val){
+        this.val = val;
+        this.next = null;
+    }
+    Node(int val, Node next){
+        this.val = val;
+        this.next = next;
+    }
+}
+
+class LinkedList{
+    Node head;
+    Node tail;
+    
+    LinkedList(){
+        this.head = null;
+        this.tail = null;
+    }
+    
+    void clear(){
+        this.head = null;
+        this.tail = null;
+    }
+    
+    int size(){
+        if(this.isEmpty()){
+            return 0;
+        }
+        Node tmp = this.head;
+        int res = 0;
+        while(tmp != null){
+            res ++;
+            tmp = tmp.next;
+        }
+        return res;
+    }
+    
+    boolean isEmpty(){
+        return this.head == null && this.tail == null;
+    }
+    
+    void addHead(int val){
+        Node newNode = new Node(val);
+        if(this.isEmpty()){
+            this.head = newNode;
+            this.tail = newNode;
+            
+        }
+        else{
+            newNode.next = this.head;
+            this.head = newNode;
+        }
+    }
+    
+    void addTail(int val){
+        Node newNode = new Node(val);
+        if(this.isEmpty()){
+            this.head = newNode;
+            this.tail = newNode;
+        }
+        else{
+            this.tail.next = newNode;
+            this.tail = newNode;
+        }
+    }
+    
+    void traverse(){
+        Node tmp = this.head;
+        if(this.isEmpty()){
+            System.out.print("Empty list encountered.\n");
+            return;
+        }
+        while(tmp != null){
+            System.out.print(tmp.val + " ");
+            tmp = tmp.next;
+        }
+        System.out.println("");
+    }
+    void traverse(int flag){
+        Node tmp = this.head;
+        if(this.isEmpty()){
+            System.out.print("Empty list encountered.\n");
+            return;
+        }
+        while(tmp != this.tail){
+            System.out.print(tmp.val + " ");
+            tmp = tmp.next;
+        }
+        System.out.print(this.tail.val);
+        
+    }
+    
+    void addAfter(int target, int val){
+        Node tmp = this.head;
+        while(tmp != null && tmp.val != target) tmp = tmp.next;
+        if(tmp == null) return ;
+        Node nextNode = tmp.next;
+        Node newNode = new Node(val);
+        tmp.next = newNode;
+        newNode.next = nextNode;
+        
+        if(tmp == this.tail) this.tail = newNode;
+    }
+    
+    void delHead(){
+        if(this.isEmpty()){
+            return ;
+        }
+        this.head = this.head.next;
+        if(this.head == null) this.clear();
+    }
+    
+    void delTail(){
+        if(this.isEmpty()){
+            return ;
+        }
+        Node tmp = this.head;
+        if(tmp.next == null) this.clear();
+        while(tmp.next != this.tail) tmp = tmp.next;
+        tmp.next = null;
+        this.tail = tmp;
+    }
+    
+    void delAfter(int target){
+        Node tmp = this.head;
+        while(tmp != null && tmp.val != target) tmp = tmp.next;
+        if(tmp == null || tmp == this.tail) return ;
+        tmp.next = tmp.next.next;
+    }
+    
+    void del(int target){
+        Node pre = null;
+        Node tmp = this.head;
+        while(tmp != null && tmp.val != target){
+            pre = tmp;
+            tmp = tmp.next;
+        }
+        if(tmp == null) return ;
+        if(tmp == this.head) this.delHead();
+        else if(tmp == this.tail) this.delTail();
+        else pre.next = pre.next.next;
+    }
+    
+    void remove(int index){
+        int n = this.size();
+        if(index < 0 || index >= n){
+            return ;
+        }
+        if(index == 0){
+            this.delHead();
+        }
+        else if(index == n - 1){
+            this.delTail();
+        }
+        else{
+            Node tmp = this.head;
+            for(int i = 1;i < index;i ++){
+                tmp = tmp.next;
+            }
+            tmp.next = tmp.next.next;
+        }
+    }
+    
+    void addTail(LinkedList list){
+        this.tail.next = list.head;
+        this.tail = list.tail;
+    }
+    
+    void insert(int index, int val){
+        int n = this.size();
+        if(index < 0 || index > n) return ;
+        if(index == 0) this.addHead(val);
+        else if(index == n) this.addTail(val);
+        else {
+            Node tmp = this.head;
+            for(int i = 1;i < index;i ++){
+                tmp = tmp.next;
+            }
+            Node next = tmp.next;
+            Node newNode =new Node(val);
+            tmp.next = newNode;
+            newNode.next = next;
+        }
+    }
+    
+    void addSorted(int val){
+        if(val <= this.head.val) this.addHead(val);
+        else if(val >= this.tail.val) this.addTail(val);
+        else{
+            Node pre = null;
+            Node tmp = this.head;
+            while(tmp != null && tmp.val < val){
+                pre = tmp;
+                tmp = tmp.next;
+            }
+            Node newNode = new Node(val);
+            pre.next = newNode;
+            newNode.next = tmp;
+        }
+    }
+    
+    int search(int target){
+        int id = 0;
+        Node tmp = this.head;
+        while(tmp != null && tmp.val != target){
+            tmp = tmp.next;
+            id ++;
+        }
+        
+        if(tmp == null) return -1;
+        return id;
+    }
+    
+    int max(){
+        int res = Integer.MIN_VALUE;
+        Node tmp = this.head;
+        while(tmp!= null){
+            res = Math.max(tmp.val, res);
+            tmp = tmp.next;
+        }
+        return res;
+    }
+    
+    int min(){
+        int res = Integer.MAX_VALUE;
+        Node tmp = this.head;
+        while(tmp != null){
+            res = Math.min(tmp.val,res);
+            tmp = tmp.next;
+        }
+        return res;
+    }
+    
+    int sum(){
+        int res = 0;
+        Node tmp = this.head;
+        while(tmp != null){
+            res += tmp.val;
+            tmp = tmp.next;
+        }
+        return res;
+    }
+    double avg(){
+        double sum = (double)this.sum();
+        double n = (double)this.size();
+        return sum / n;
+    }
+    
+    boolean isSorted(){
+        if(this.isEmpty() || this.head == this.tail){
+            return true;
+        }
+        Node tmp= this.head;
+        while(tmp.next != null){
+            if(tmp.next.val < tmp.val){
+                return false;
+            }
+            tmp = tmp.next;
+        }
+        return true;
+    }
+    
+    boolean equalsIgnoreOrder(LinkedList list){
+        if(this.size() != list.size()) return false;
+        this.sort();
+        list.sort();
+        Node tmp1 = this.head;
+        Node tmp2 = list.head;
+        while(tmp1 != null){
+            if(tmp1.val != tmp2.val) return false;
+            tmp1 = tmp1.next;
+            tmp2 = tmp2.next;
+        }
+        return true;
+        
+    }
+    
+    void swap(Node n1, Node n2){
+        int tmp = n1.val;
+        n1.val = n2.val;
+        n2.val = tmp;
+    }
+    void sort(){
+        boolean swap = true;
+       
+        while(swap){
+            swap = false;
+            Node tmp = this.head;
+            while(tmp != null && tmp.next != null){
+                if(tmp.val > tmp.next.val){
+                    swap(tmp,tmp.next);
+                    swap = true;
+                }
+                tmp = tmp.next;
+            }
+        }
+    }
+    int[] toArray(){
+        int n = this.size();
+        int[] res = new int[n];
+        Node tmp = this.head;
+        for(int i = 0 ;i < n;i ++){
+            res[i] = tmp.val;
+            tmp = tmp.next;
+        }
+        return res;
+        
+    }
+    
+    LinkedList merge(LinkedList l1, LinkedList l2){
+        LinkedList res = new LinkedList();
+        Node tmp1 = l1.head;
+        Node tmp2 = l2.head;
+        while(tmp1 != null && tmp2 != null){
+            if(tmp1.val < tmp2.val){
+                res.addTail(tmp1.val);
+                tmp1 = tmp1.next;
+            }
+            else{
+                res.addTail(tmp2.val);
+                tmp2 = tmp2.next;
+            }
+        }
+        while(tmp1 != null){
+            res.addTail(tmp1.val);
+            tmp1 = tmp1.next;
+        }
+        while(tmp2 != null){
+            res.addTail(tmp2.val);
+            tmp2 = tmp2.next;
+        }
+        return res;
+    }
+    
+    void reverse(){
+        Node tmp = this.head;
+        Node pre = null;
+        while(tmp != null){
+            Node next = tmp.next;
+            tmp.next = pre;
+            pre = tmp;
+            tmp = next;
+        }
+        tmp = this.head;
+        this.head = this.tail;
+        this.tail = tmp;
+    }
+    
+    void addBefore(int target, int val){
+        if(this.head.val == target) {
+            this.addHead(val);
+            return ;
+        }
+        Node pre = null;
+        Node tmp = this.head;
+        while(tmp != null && tmp.val != target){
+            pre =tmp;
+            tmp = tmp.next;
+        }
+        if(tmp == null) return ;
+        Node newNode = new Node(val);
+        pre.next = newNode;
+        newNode.next = tmp;
+    }
+}
+
+
+public class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        LinkedList list = new LinkedList();
+        int choice = sc.nextInt();
+        int n,x;
+        n = sc.nextInt();
+        switch(choice){
+            case 1:
+                for(int i = 1;i <= n;i ++) list.addTail(sc.nextInt());
+                x = sc.nextInt();
+                System.out.print("1. Add "+x+" before the head of "+n+"-element list: ");
+                list.traverse();
+                list.addHead(x);
+                list.traverse();
+                break;
+            case 2:
+                for(int i = 1;i<= n;i ++) list.addTail(sc.nextInt());
+                x = sc.nextInt();
+                System.out.print("2. Add "+x+" after the tail of "+n+"-element list: ");
+                list.traverse();
+                list.addTail(x);
+                list.traverse();
+                
+                break;
+                
+            case 3: 
+                for(int i = 1;i<= n;i ++) list.addTail(sc.nextInt());
+                int t = sc.nextInt();
+                x = sc.nextInt();
+                
+                System.out.print("3. Insert an element "+x+" after the element "+t+" in the "+n+"-element list ");
+                list.traverse();
+                list.addAfter(t,x);
+                list.traverse();
+                
+                break;
+            case 4:
+                for(int i = 1;i<= n;i ++) list.addTail(sc.nextInt());
+                System.out.print("4. Traverse the "+n+"-element list: ");
+                list.traverse();
+                list.traverse();
+                break;
+            
+            case 5:
+                for(int i = 1;i<= n;i ++) list.addTail(sc.nextInt());
+                
+                System.out.print("5. Delete the head of the "+n+"-element list: ");
+                list.traverse();
+                list.delHead();
+                list.traverse();
+                
+                break;
+                
+            
+            case 6:
+                for(int i = 1;i<= n;i ++) list.addTail(sc.nextInt());
+                
+                System.out.print("6. Delete the tail of the "+n+"-element list: ");
+                list.traverse();
+                list.delTail();
+                list.traverse();
+                break;
+                
+            case 7:
+                for(int i = 1;i<= n;i ++) list.addTail(sc.nextInt());
+                x = sc.nextInt();
+                System.out.print("7. Delete the element after the element "+x+" of the "+n+"-element list: ");
+                list.traverse();
+                list.delAfter(x);
+                list.traverse();                
+                break;
+                
+            case 8:
+                for(int i = 1;i <= n;i ++) list.addTail(sc.nextInt());
+                x = sc.nextInt();
+                System.out.print("8. Delete the element "+x+" in the "+n+"-element list: ");
+                list.traverse();
+                list.del(x);
+                list.traverse();                
+                break;
+                
+            case 9:
+                for(int i = 1;i <= n;i ++) list.addTail(sc.nextInt());
+                x = sc.nextInt();
+                System.out.print("9. Search the element "+x+" in the "+n+"-element list: ");
+                list.traverse();
+                System.out.println(x);
+                break;
+                
+            case 10:
+                for(int i = 1;i <= n;i ++) list.addTail(sc.nextInt());
+                
+                System.out.print("10. Count the number of the elements of the "+n+"-element list: ");
+                list.traverse();
+                System.out.println(n);
+                break;
+            
+            case 11:
+                for(int i = 1;i <= n;i ++) list.addTail(sc.nextInt());
+                x = sc.nextInt();
+                System.out.print("11. Delete the  "+x+"rd element in the "+n+"-node list: ");
+                list.traverse();
+                list.remove(x-1);
+                list.traverse();
+                
+                break;
+            case 12: 
+                for(int i = 1;i <= n;i ++) list.addTail(sc.nextInt());
+                
+                System.out.print("12. Sort in accending order the "+n+"-node list: ");
+                list.traverse();
+                list.sort();
+                list.traverse();
+                break;
+            case 13:
+                for(int i = 1;i <= n;i ++) list.addTail(sc.nextInt());
+                x = sc.nextInt();
+                System.out.print("13. Delete the element "+x+" in the "+n+"-node list: ");
+                list.traverse();
+                list.del(x);
+                list.traverse();
+                break;
+            case 14: 
+                for(int i = 1;i <= n;i ++) list.addTail(sc.nextInt());
+                
+                System.out.print("14. create and return array containing info of all nodes in the "+n+"-node list.\n");
+                list.traverse();
+                int[] a = list.toArray();
+                break;
+                
+            case 15:
+                for(int i = 1;i <= n;i ++) list.addTail(sc.nextInt());
+                LinkedList list2 = new LinkedList();
+                int n2 = sc.nextInt();
+                for(int i = 1;i <= n2;i ++) list2.addTail(sc.nextInt());
+                LinkedList l = list.merge(list,list2);
+                System.out.print("15. Merge two ordered singly linked lists of integers into one ordered list: "+n+"-node list = ");
+                list.traverse(1);
+                System.out.print("; "+n2+"-node list: ");
+                list2.traverse();
+                l.traverse();
+                break;
+                
+            case 16:
+                for(int i = 1;i<= n;i ++) list.addTail(sc.nextInt());
+                t = sc.nextInt();
+                x = sc.nextInt();
+                
+                System.out.print("16. add a node with value "+t+" before the node "+x+" in the "+n+"-node list: ");
+                list.traverse();
+                list.addBefore(x,t);
+                list.traverse();
+                
+                break;
+            
+            case 17:
+                for(int i = 1;i <= n;i ++) list.addTail(sc.nextInt());
+                list2 = new LinkedList();
+                n2 = sc.nextInt();
+                for(int i = 1;i <= n2;i ++) list2.addTail(sc.nextInt());
+                System.out.print("17. Attach a singly linked list of "+n2+" elements ");
+                list2.traverse(1);
+                System.out.print(" to the end of another singly linked list of "+n+" nodes: ");
+                list.traverse();
+                list.addTail(list2);
+                list.traverse();
+                break;
+            case 18:
+                for(int i = 1;i <= n;i ++) list.addTail(sc.nextInt());
+                System.out.print("18. find and return the maximum value in the "+n+"-node list: ");
+                list.traverse();
+                System.out.print(list.max());
+                break;
+            case 19:
+                for(int i = 1;i <= n;i ++) list.addTail(sc.nextInt());
+                System.out.print("19. find and return the minimum value in the "+n+"-node list: ");
+                list.traverse();
+                System.out.print(list.min());
+                break;
+            case 20:
+                for(int i = 1;i <= n;i ++) list.addTail(sc.nextInt());
+                System.out.print("20. return the sum of all values in the "+n+"-node list: ");
+                list.traverse();
+                System.out.print(list.sum());
+                break;
+            case 21:
+                for(int i = 1;i <= n;i ++) list.addTail(sc.nextInt());
+                System.out.print("21. return the average of all values in the "+n+"-node list: ");
+                list.traverse();
+                System.out.print(String.format("%.2f",list.avg()));
+                break;
+            case 22:
+                for(int i = 1;i <= n;i ++) list.addTail(sc.nextInt());
+                System.out.print("22. check and return true if the "+n+"-node list: ");
+                list.traverse(1);
+                System.out.print(" is sorted, return false if the list is not sorted.\n");
+                System.out.print(list.isSorted());
+                break;
+            case 23:
+                for(int i = 1;i <= n;i ++) list.addTail(sc.nextInt());
+                x = sc.nextInt();
+                System.out.print("23. sort the 19-node list: ");
+                list.traverse(1);
+                System.out.println(" then insert a node with value "+x+" into the sorted list so that the new list is a sorted list");
+                list.sort();
+                list.traverse();
+                list.addSorted(x);
+                list.traverse();
+                break;
+            case 24:
+                for(int i = 1;i <= n;i ++) list.addTail(sc.nextInt());
+                System.out.print("24. Reverse the singly linked list of 20 nodes: ");
+                list.traverse();
+                list.reverse();
+                list.traverse();
+                break;
+            case 25:
+                for(int i = 1;i <= n;i ++) list.addTail(sc.nextInt());
+                list2 = new LinkedList();
+                n2 = sc.nextInt();
+                for(int i = 1;i <= n2;i ++) list2.addTail(sc.nextInt());
+                
+                System.out.print("25. Check whether two singly linked list have the same contents: 1st list of "+n+" elements: ");
+                list.traverse(1);
+                System.out.print("; 2nd list of "+n2+" elements: ");
+                list2.traverse();
+                if(list.equalsIgnoreOrder(list2)){
+                    System.out.print("yes");
+                }
+                else{
+                    System.out.print("no");
+                    
+                }
+                break;
+            default:
+                
+        }
+    }
+}

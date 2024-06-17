@@ -1,0 +1,4 @@
+C001, Week 1: Introduction to Java, 100.0, 20
+D002, A story of ducks, 30.0, 10
+A003, Gonne with the wind, 300.0, 55
+B004, Dances with Wolfs, 150.0, 86
