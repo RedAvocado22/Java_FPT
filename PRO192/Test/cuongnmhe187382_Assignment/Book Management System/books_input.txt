@@ -1,3 +1,0 @@
- B10|The chair| 60|    3000
-    B08  |The talbe|13  |  5000
-B11  |The TV     |    35|      10000
