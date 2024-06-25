@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class MenuUI {
 
   private String menuTitle;
-  private ArrayList<String> optionList = new ArrayList();
+  private ArrayList<String> optionList = new ArrayList<>();
 
   public MenuUI(String menuTitle) {
     this.menuTitle = menuTitle;
@@ -28,7 +28,7 @@ public class MenuUI {
   public int getSize() {
     return optionList.size();
   }
-  
+
   /**
    * Add new Option for menu.
    * 

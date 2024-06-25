@@ -14,9 +14,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -37,7 +34,7 @@ public class BookBo {
   public BookBo(List<Book> list) {
     this.list = list;
   }
-  
+
   /**
    * Add a new book.
    */
@@ -47,7 +44,7 @@ public class BookBo {
     list.add(book);
     System.out.println("A new book is added!");
   }
-  
+
   /**
    * Display all book.
    */
@@ -57,7 +54,7 @@ public class BookBo {
       book.display();
     });
   }
-  
+
   /**
    * Search book that have that code.
    * 
@@ -70,11 +67,11 @@ public class BookBo {
         return i;
       }
     }
-    
+
     System.out.println("The book not exist!");
     return -1;
   }
-  
+
   /**
    * Display only one book by the index.
    * 
@@ -83,20 +80,20 @@ public class BookBo {
   public void displayOne(int index) {
     list.get(index).display();
   }
-  
+
   /**
    * Update book price.
    * 
    * @param index the position of book need to update price.
    */
   public void updatePrice(int index) {
-    int newPrice = Validate.getInt("Enter new price: ", 
-                                   "Price is out of range!", 
-                                   "Price must be a digit!", 
-                                    0, Integer.MAX_VALUE);
+    int newPrice = Validate.getInt("Enter new price: ",
+        "Price is out of range!",
+        "Price must be a digit!",
+        0, Integer.MAX_VALUE);
     list.get(index).setPrice(newPrice);
   }
-  
+
   /**
    * Find the expensive book.
    * 
@@ -105,14 +102,14 @@ public class BookBo {
   public Book mostExpensive() {
     return Collections.max(list, Comparator.comparing(Book::getPrice));
   }
-  
+
   /**
    * Sort the book list.
    */
   public void sort() {
     Collections.sort(list);
   }
-  
+
   /**
    * Remove by index.
    * 
@@ -121,31 +118,31 @@ public class BookBo {
   public void remove(int index) {
     list.remove(index);
   }
-  
+
   /**
    * Read data of books from the file.
    */
   public void takeData() {
     list.removeAll(list);
-    
+
     FileInputStream fis = null;
     InputStreamReader reader = null;
     BufferedReader bufferReader = null;
 
     try {
-      String fileName = Validate.getString("Enter file path: ", 
-                                           "Error file path!", 
-                                           IConstant.REGEX_FILE);
-      
+      String fileName = Validate.getString("Enter file path: ",
+          "Error file path!",
+          IConstant.REGEX_FILE);
+
       File file = new File(fileName);
-      
+
       if (!file.exists()) {
         System.out.println("File not exist!");
         return;
       }
 
       fis = new FileInputStream(fileName);
-      
+
       reader = new InputStreamReader(fis, StandardCharsets.UTF_8);
 
       bufferReader = new BufferedReader(reader);
