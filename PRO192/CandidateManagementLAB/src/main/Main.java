@@ -25,19 +25,20 @@ public class Main {
                     "Invalid integer number",
                     1, 5);
             switch (choice) {
-                case 1:
+                case 1 -> {
                     System.out.println();
                     candidateBo.add(IConstant.EXPERIENCE_TYPE);
-                    break;
-                case 2:
+                }
+                case 2 -> {
                     System.out.println();
                     candidateBo.add(IConstant.FRESHER_TYPE);
-                    break;
-                case 3:
+                }
+                case 3 -> {
                     System.out.println();
                     candidateBo.add(IConstant.INTERN_TYPE);
-                    break;
-                case 4:
+                }
+                case 4 -> {
+
                     System.out.println();
                     System.out.println("=======EXPERIENCE CANDIDATE=======");
                     candidateBo.displayCandidateNameByType(IConstant.EXPERIENCE_TYPE);
@@ -58,11 +59,10 @@ public class Main {
                             "Invalid integer number",
                             0, 2);
                     candidateBo.display(candidateBo.search(text, type));
-                    break;
-                case 5:
+                }
+                case 5 -> {
                     flag = false;
-                    break;
-
+                }
             }
         } while (flag);
     }
