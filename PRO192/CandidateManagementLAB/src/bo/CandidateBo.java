@@ -11,7 +11,7 @@ import util.Helper;
 
 public class CandidateBo {
 
-    private List<Candidate> list;
+    private final List<Candidate> list;
 
     public CandidateBo(List<Candidate> list) {
         this.list = list;

@@ -11,7 +11,6 @@ import mock.Data;
 import util.Helper;
 import util.Validate;
 
-
 public class Main {
 
     public static void main(String[] args) {
@@ -25,10 +24,10 @@ public class Main {
                     "Invalid integer number",
                     1, 5);
             switch (choice) {
-                case 1 -> {
+                case 1:
                     System.out.println();
                     candidateBo.add(IConstant.EXPERIENCE_TYPE);
-                }
+                    break;
                 case 2 -> {
                     System.out.println();
                     candidateBo.add(IConstant.FRESHER_TYPE);
@@ -38,7 +37,6 @@ public class Main {
                     candidateBo.add(IConstant.INTERN_TYPE);
                 }
                 case 4 -> {
-
                     System.out.println();
                     System.out.println("=======EXPERIENCE CANDIDATE=======");
                     candidateBo.displayCandidateNameByType(IConstant.EXPERIENCE_TYPE);
