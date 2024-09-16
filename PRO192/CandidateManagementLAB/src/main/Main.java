@@ -24,10 +24,10 @@ public class Main {
                     "Invalid integer number",
                     1, 5);
             switch (choice) {
-                case 1:
+                case 1 -> {
                     System.out.println();
                     candidateBo.add(IConstant.EXPERIENCE_TYPE);
-                    break;
+                }
                 case 2 -> {
                     System.out.println();
                     candidateBo.add(IConstant.FRESHER_TYPE);
