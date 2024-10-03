@@ -6,7 +6,7 @@
 package main;
 
 import bo.BillBO;
-import entity.Wallet;
+import entity.Person;
 import java.util.ArrayList;
 import util.Helper;
 
@@ -21,16 +21,22 @@ public class Main {
      */
     public static void main(String[] args) {
         BillBO billBo = new BillBO(new ArrayList<>());
-        do {
-            Helper.menu();
-            
-            billBo.input();
-            
-            Wallet w = new Wallet();
-            w.input();
-            
-            billBo.display(w);
-        } while (Helper.isContinue());
+        
+        Helper.menu();
+
+        billBo.input();
+
+        Person p = new Person();
+        p.input();
+
+        int total = billBo.calculateTotal();
+
+        System.out.println("Total: " + total);
+        if (p.isPayable(total)) {
+            System.out.println("Enough!");
+        } else {
+            System.out.println("Not enough!");
+        }
     }
 
 }

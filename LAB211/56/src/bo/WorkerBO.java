@@ -5,10 +5,7 @@
  */
 package bo;
 
-import entity.History;
 import entity.Worker;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import util.Helper;
 import util.Validate;
@@ -21,9 +18,8 @@ public class WorkerBO {
 
     private List<Worker> workers;
 
-    public WorkerBO(List<Worker> workers, List<History> historys) {
+    public WorkerBO(List<Worker> workers) {
         this.workers = workers;
-        this.histories = historys;
     }
 
     /**
