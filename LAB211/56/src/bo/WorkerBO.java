@@ -20,11 +20,10 @@ import util.Validate;
 public class WorkerBO {
 
     private List<Worker> workers;
-    private List<History> historys;
 
     public WorkerBO(List<Worker> workers, List<History> historys) {
         this.workers = workers;
-        this.historys = historys;
+        this.histories = historys;
     }
 
     /**
@@ -75,48 +74,6 @@ public class WorkerBO {
                 }
                 w.setSalary(w.getSalary() - amount);
             }
-        }
-
-        recordHistory(w, UPDATE_OPTION);
-    }
-
-    /**
-     * Record the salary update in the history list.
-     * 
-     * @param w Worker whose salary has been updated
-     * @param UPDATE_OPTION "UP" if salary increased, "DOWN" if salary decreased
-     */
-    private void recordHistory(Worker w, String UPDATE_OPTION) {
-        History h = new History(
-                UPDATE_OPTION,
-                Helper.getCurrentDate(),
-                w.getId(),
-                w.getName(),
-                w.getAge(),
-                w.getSalary(),
-                w.getWorkLocation()
-        );
-
-        historys.add(h);
-    }
-
-    private void sortHistorys() {
-        Collections.sort(historys, Comparator
-                .comparing(History::getId)
-                .thenComparing(History::getDate)
-        );
-    }
-    public void displayHistory() {
-        System.out.print("------------- Display Information Salary -------------");
-        System.out.printf(
-                "\n%-5s %-15s %-6s %-5s %-7s %-10s",
-                "Code", "Name", "Age", "Salary", "Status", "Date"
-        );
-
-        sortHistorys();
-        
-        for (History h : historys) {
-            h.display();
         }
     }
 }

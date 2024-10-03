@@ -5,6 +5,7 @@
  */
 package main;
 
+import bo.HistoryBO;
 import bo.WorkerBO;
 import constant.IConstant;
 import entity.History;
@@ -26,9 +27,9 @@ public class Main {
      */
     public static void main(String[] args) {
         List<Worker> workers = Data.workers;
-        List<History> historys = new ArrayList<>();
 
-        WorkerBO workerBo = new WorkerBO(workers, historys);
+        WorkerBO workerBo = new WorkerBO(workers);
+        HistoryBO historyBo = new HistoryBO(new ArrayList());
 
         do {
             Helper.menu();
@@ -58,6 +59,7 @@ public class Main {
 
                     if (w != null) {
                         workerBo.updateSalary(IConstant.UP, w);
+                        historyBo.add(w, IConstant.UP);
                     } else {
                         System.out.println("The worker not exist!");
                     }
@@ -75,13 +77,14 @@ public class Main {
 
                     if (w != null) {
                         workerBo.updateSalary(IConstant.DOWN, w);
+                        historyBo.add(w, IConstant.DOWN);
                     } else {
                         System.out.println("The worker not exist!");
                     }
                 }
 
                 case 4 -> {
-                    workerBo.displayHistory();
+                    historyBo.display();
                 }
 
                 case 5 -> {
