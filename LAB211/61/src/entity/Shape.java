@@ -9,7 +9,7 @@ package entity;
  *
  * @author Minh Cuong
  */
-public class Shape {
+public abstract class Shape {
 
     /**
      * Calculate the perimeter of shape.

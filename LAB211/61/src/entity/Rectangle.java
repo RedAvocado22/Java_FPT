@@ -45,18 +45,18 @@ public class Rectangle extends Shape {
      */
     @Override
     public void input() {
-        this.length = Validate.getDouble(
-                "Please input side length of Rectangle: ", 
-                "It must be a positive number!", 
-                "It must be a number!",
-                0, Double.MAX_VALUE
-        );
-        
         this.width = Validate.getDouble(
                 "Please input side width of Rectangle: ", 
                 "It must be a positive number!", 
                 "It must be a number!",
-                0, Double.MAX_VALUE
+                1, Double.MAX_VALUE
+        );
+        
+        this.length = Validate.getDouble(
+                "Please input side length of Rectangle: ", 
+                "It must be a positive number!", 
+                "It must be a number!",
+                this.width, Double.MAX_VALUE
         );
     }
 

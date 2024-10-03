@@ -39,7 +39,7 @@ public class Circle extends Shape {
                 "Please input radius of Circle: ", 
                 "It must be a positive number!", 
                 "It must be a number!", 
-                0, Double.MAX_VALUE
+                1, Double.MAX_VALUE
         );
     }
     
