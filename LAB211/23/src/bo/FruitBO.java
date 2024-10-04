@@ -16,13 +16,21 @@ import util.Helper;
  */
 public class FruitBO {
 
-    List<Fruit> fruits;
+    private List<Fruit> fruits;
     
     public FruitBO() {
         this.fruits = new ArrayList();
     }
     
     public FruitBO(List<Fruit> fruits) {
+        this.fruits = fruits;
+    }
+
+    public List<Fruit> getFruits() {
+        return fruits;
+    }
+
+    public void setFruits(List<Fruit> fruits) {
         this.fruits = fruits;
     }
     
@@ -37,8 +45,8 @@ public class FruitBO {
     }
     
     public void display() {
-        for (int i = 1; i < fruits.size(); i++) {
-            fruits.get(i).display(i);
+        for (int i = 0; i < fruits.size(); i++) {
+            fruits.get(i).display(i + 1);
         }
     }
 }
