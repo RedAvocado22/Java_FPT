@@ -28,10 +28,13 @@ public class ItemBO {
         return items;
     }
 
-    public void add(FruitBO fruitBO) {
+    public boolean add(FruitBO fruitBO) {
         do {
             Item item = new Item();
-            item.input(fruitBO);
+
+            if (!item.input(fruitBO)) {
+                return false;
+            }
 
             int index = items.indexOf(item);
 
@@ -40,16 +43,21 @@ public class ItemBO {
             } else {
                 items.get(index).merge(item.getQuantity());
             }
+            
+            display();
+            System.out.println("");
         } while (Helper.isContinue());
+
+        return true;
     }
-    
+
     public void display() {
         for (Item item : items) {
             item.display();
         }
     }
-    
-    public int total() {
+
+    public int calculateTotal() {
         return items.stream().mapToInt(i -> i.getAmount()).sum();
     }
 }
