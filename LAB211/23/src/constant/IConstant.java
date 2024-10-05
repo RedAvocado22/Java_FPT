@@ -13,7 +13,7 @@ public interface IConstant {
 
     String INTEGER_MES = "It must be an integer!";
     String DOUBLE_MES = "It must be a double!";
-    String POSITIVE_MES = "It must be a positive number!";
+    String RANGE_MES = "Out of range!";
     String STRING_MES = "Invalidated!";
 
     String REGEX_NAME = "^[A-Za-z ]+$";
