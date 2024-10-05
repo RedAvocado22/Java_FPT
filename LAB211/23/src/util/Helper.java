@@ -19,26 +19,13 @@ public class Helper {
     }
 
     /**
-     * Get the current local date in the "dd/MM/yyyy" format.
-     * 
-     * @return A string representing the current date in the "dd/MM/yyyy" format.
-     */
-    public static String getCurrentDate() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        
-        LocalDate currentDate = LocalDate.now();
-        return currentDate.format(formatter);
-    }
-    
-    /**
      * Display menu for user to choose.
      */
     public static void menu() {
-        System.out.println("\n========= Worker Management =========");
-        System.out.println("1. Add worker");
-        System.out.println("2. Up salary");
-        System.out.println("3. Down salary");
-        System.out.println("4. Display infoormation salary");
+        System.out.println("\n========= Fruit Shopping =========");
+        System.out.println("1. Add fruit");
+        System.out.println("2. View orders");
+        System.out.println("3. Shopping (for buyer)");
         System.out.println("5. Exit");
     }
 
