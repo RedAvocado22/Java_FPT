@@ -90,24 +90,31 @@ public class Fruit {
         if (this == obj) {
             return true;
         }
-        
+
         if (obj == null) {
             return false;
         }
-        
+
         if (getClass() != obj.getClass()) {
             return false;
         }
-        
+
         final Fruit other = (Fruit) obj;
-        
+
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        
+
         return Objects.equals(this.name, other.name);
     }
 
+    /**
+     * Retrieves a unique ID for the fruit from the user. Ensures that the ID
+     * does not already exist in the provided list of fruits.
+     *
+     * @param fruits The list of existing fruits to check for duplicate IDs
+     * @return A unique ID entered by the user
+     */
     private String getId(List<Fruit> fruits) {
         do {
             String id = Validate.getString(
@@ -126,6 +133,12 @@ public class Fruit {
         } while (true);
     }
 
+    /**
+     * Inputs the details of the fruit.
+     *
+     * @param fruits The list of existing fruits to ensure no duplicate IDs are
+     * entered
+     */
     public void input(List<Fruit> fruits) {
         this.id = getId(fruits);
 
@@ -154,6 +167,12 @@ public class Fruit {
         );
     }
 
+    /**
+     * Displays the details of the fruit, including its index in menu. Print
+     * "(Sold out)" if the stock is zero.
+     *
+     * @param index the index number of the fruit for display purposes
+     */
     public void display(int index) {
         System.out.printf(
                 "%-10d%-10s%-10d%-10d\n",

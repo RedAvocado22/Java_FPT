@@ -28,6 +28,13 @@ public class ItemBO {
         return items;
     }
 
+    /**
+     * Adds an item to the list. Prompts the user for item details and adds it
+     * to the list.
+     *
+     * @param fruitBO The FruitBO object used to select fruits for the item
+     * return false if user choose the fruit that out of stock.
+     */
     public boolean add(FruitBO fruitBO) {
         do {
             Item item = new Item();
@@ -43,18 +50,27 @@ public class ItemBO {
             } else {
                 items.get(index).merge(item.getQuantity());
             }
-            
+
         } while (Helper.isContinue());
 
         return true;
     }
 
+    /**
+     * Displays all items in the list, including the fruit name, quantity, and
+     * total amount for each item.
+     */
     public void display() {
         for (Item item : items) {
             item.display();
         }
     }
 
+    /**
+     * Calculates the total cost of all items in the list.
+     *
+     * @return The total cost of all items
+     */
     public int calculateTotal() {
         return items.stream().mapToInt(i -> i.getAmount()).sum();
     }

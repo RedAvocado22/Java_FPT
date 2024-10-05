@@ -23,6 +23,13 @@ public class OrderBO {
         this.orders = orders;
     }
 
+    /**
+     * Adds an order to the list.
+     *
+     * @param fruitBO The FruitBO object used to create items in the order
+     * @return true if the order is added successfully, false if the order
+     * cannot be added
+     */
     public boolean add(FruitBO fruitBO) {
         Order order = new Order();
 
@@ -34,6 +41,10 @@ public class OrderBO {
         return false;
     }
 
+    /**
+     * Displays all orders, including the customer name, and the total for each
+     * order.
+     */
     public void display() {
         this.orders.stream().forEach((order) -> {
             order.display();

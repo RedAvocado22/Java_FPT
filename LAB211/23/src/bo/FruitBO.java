@@ -34,6 +34,10 @@ public class FruitBO {
         this.fruits = fruits;
     }
 
+    /**
+     * Adds a fruit to the list. Prompts the user for fruit details and adds it
+     * to the list.
+     */
     public void add() {
         do {
             Fruit f = new Fruit();
@@ -44,6 +48,10 @@ public class FruitBO {
         } while (Helper.isContinue());
     }
 
+    /**
+     * Displays all the fruits in the list, including their details such as
+     * name, price, and stock.
+     */
     public void display() {
         for (int i = 0; i < fruits.size(); i++) {
             fruits.get(i).display(i + 1);

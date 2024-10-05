@@ -8,7 +8,6 @@ package entity;
 import bo.FruitBO;
 import constant.IConstant;
 import java.util.List;
-import java.util.Objects;
 import util.Validate;
 
 /**
@@ -48,9 +47,16 @@ public class Item {
         this.quantity += amount;
     }
 
+    /**
+     * Inputs the details of the item (fruit and quantity) from the user.
+     *
+     * @param fruitBO The FruitBO object used to select the fruit for the item
+     * @return true if the item is added successfully, false if the selected
+     * fruit is out of stock
+     */
     public boolean input(FruitBO fruitBO) {
         fruitBO.display();
-        
+
         List<Fruit> fruits = fruitBO.getFruits();
         int len = fruits.size();
 
@@ -79,10 +85,20 @@ public class Item {
         return true;
     }
 
+    /**
+     * Calculates the total amount for this item based on the price of the fruit
+     * and the quantity.
+     *
+     * @return The total amount for this item
+     */
     public int getAmount() {
         return this.fruit.getPrice() * this.quantity;
     }
 
+    /**
+     * Displays the details of this item, including the fruit name, quantity,
+     * and total amount.
+     */
     public void display() {
         System.out.printf(
                 "\n%-10s%10d%10d",

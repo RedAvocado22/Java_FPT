@@ -45,6 +45,13 @@ public class Order {
         this.itemBO = itemBO;
     }
 
+    /**
+     * Inputs the details of the order (customer and items) from the user.
+     *
+     * @param fruitBO The FruitBO object used to create items in the order
+     * @return true if the order is added successfully, false if no items are
+     * added to the order
+     */
     public boolean input(FruitBO fruitBO) {
         this.itemBO.add(fruitBO);
 
@@ -61,6 +68,10 @@ public class Order {
         return true;
     }
 
+    /**
+     * Displays the details of the order, including the customer name and total
+     * amount.
+     */
     public void display() {
         System.out.print("\nCustomer: " + this.customer);
 
