@@ -17,11 +17,11 @@ import util.Helper;
 public class FruitBO {
 
     private List<Fruit> fruits;
-    
+
     public FruitBO() {
         this.fruits = new ArrayList();
     }
-    
+
     public FruitBO(List<Fruit> fruits) {
         this.fruits = fruits;
     }
@@ -33,17 +33,17 @@ public class FruitBO {
     public void setFruits(List<Fruit> fruits) {
         this.fruits = fruits;
     }
-    
+
     public void add() {
         do {
             Fruit f = new Fruit();
-            
+
             f.input(fruits);
-            
+
             fruits.add(f);
         } while (Helper.isContinue());
     }
-    
+
     public void display() {
         for (int i = 0; i < fruits.size(); i++) {
             fruits.get(i).display(i + 1);
