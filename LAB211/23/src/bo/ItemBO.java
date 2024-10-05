@@ -44,8 +44,6 @@ public class ItemBO {
                 items.get(index).merge(item.getQuantity());
             }
             
-            display();
-            System.out.println("");
         } while (Helper.isContinue());
 
         return true;
