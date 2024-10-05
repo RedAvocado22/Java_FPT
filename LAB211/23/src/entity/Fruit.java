@@ -82,9 +82,6 @@ public class Fruit {
         int hash = 5;
         hash = 89 * hash + Objects.hashCode(this.id);
         hash = 89 * hash + Objects.hashCode(this.name);
-        hash = 89 * hash + this.price;
-        hash = 89 * hash + this.stock;
-        hash = 89 * hash + Objects.hashCode(this.origin);
         return hash;
     }
 
@@ -100,7 +97,10 @@ public class Fruit {
             return false;
         }
         final Fruit other = (Fruit) obj;
-        return true;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return Objects.equals(this.name, other.name);
     }
 
     private String getId(List<Fruit> fruits) {
@@ -108,11 +108,11 @@ public class Fruit {
             String id = Validate.getString(
                     "Enter id: ",
                     IConstant.STRING_MES,
-                    IConstant.REGEX_NAME
+                    IConstant.REGEX_ID
             );
-            
+
             boolean isExist = fruits.stream().anyMatch(f -> f.getId().equals(id));
-            
+
             if (isExist) {
                 System.out.println("The id is exist!");
             } else {
@@ -130,16 +130,14 @@ public class Fruit {
                 IConstant.REGEX_NAME
         );
 
-        this.price = Validate.getInt(
-                "Enter price: ",
-                IConstant.POSITIVE_MES,
+        this.price = Validate.getInt("Enter price: ",
+                IConstant.RANGE_MES,
                 IConstant.INTEGER_MES, 0,
                 Integer.MAX_VALUE
         );
 
-        this.stock = Validate.getInt(
-                "Enter stock: ",
-                IConstant.POSITIVE_MES,
+        this.stock = Validate.getInt("Enter stock: ",
+                IConstant.RANGE_MES,
                 IConstant.INTEGER_MES, 0,
                 Integer.MAX_VALUE
         );
@@ -153,12 +151,12 @@ public class Fruit {
 
     public void display(int index) {
         System.out.printf(
-                "\n%10d|%10s|%10d|%10d",
+                "%-10d%-10s%-10d%-10d\n",
                 index, this.name, this.price, this.stock
         );
 
         if (this.stock == 0) {
-            System.out.println(" (Sold out)");
+            System.out.print(" (Sold out)");
         }
     }
 }
