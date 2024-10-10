@@ -50,23 +50,12 @@ public class Item {
     /**
      * Inputs the details of the item (fruit and quantity) from the user.
      *
-     * @param fruitBO The FruitBO object used to select the fruit for the item
+     * @param fruit
      * @return true if the item is added successfully, false if the selected
      * fruit is out of stock
      */
-    public boolean input(FruitBO fruitBO) {
-        fruitBO.display();
-
-        List<Fruit> fruits = fruitBO.getFruits();
-        int len = fruits.size();
-
-        int choice = Validate.getInt("Item: ",
-                IConstant.RANGE_MES,
-                IConstant.INTEGER_MES,
-                1, len
-        );
-
-        this.fruit = fruits.get(choice - 1);
+    public boolean input(Fruit fruit) {
+        this.fruit = fruit;
 
         int stock = this.fruit.getStock();
 

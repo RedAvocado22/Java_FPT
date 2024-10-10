@@ -5,9 +5,12 @@
  */
 package bo;
 
+import constant.IConstant;
+import entity.Fruit;
 import entity.Item;
 import java.util.List;
 import util.Helper;
+import util.Validate;
 
 /**
  *
@@ -29,17 +32,29 @@ public class ItemBO {
     }
 
     /**
-     * Adds an item to the list. Prompts the user for item details and adds it
-     * to the list.
+     * Adds an item to the list.Prompts the user for item details and adds it
+ to the list.
      *
      * @param fruitBO The FruitBO object used to select fruits for the item
      * return false if user choose the fruit that out of stock.
+     * @return 
      */
     public boolean add(FruitBO fruitBO) {
         do {
             Item item = new Item();
 
-            if (!item.input(fruitBO)) {
+            fruitBO.display();
+
+            List<Fruit> fruits = fruitBO.getFruits();
+            int len = fruits.size();
+
+            int choice = Validate.getInt("Item: ",
+                    IConstant.RANGE_MES,
+                    IConstant.INTEGER_MES,
+                    1, len
+            );
+            
+            if (!item.input(fruits.get(choice - 1))) {
                 return false;
             }
 

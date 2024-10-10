@@ -6,7 +6,6 @@
 package entity;
 
 import constant.IConstant;
-import java.util.List;
 import java.util.Objects;
 import util.Validate;
 
@@ -109,38 +108,12 @@ public class Fruit {
     }
 
     /**
-     * Retrieves a unique ID for the fruit from the user. Ensures that the ID
-     * does not already exist in the provided list of fruits.
-     *
-     * @param fruits The list of existing fruits to check for duplicate IDs
-     * @return A unique ID entered by the user
-     */
-    private String getId(List<Fruit> fruits) {
-        do {
-            String id = Validate.getString(
-                    "Enter id: ",
-                    IConstant.STRING_MES,
-                    IConstant.REGEX_ID
-            );
-
-            boolean isExist = fruits.stream().anyMatch(f -> f.getId().equals(id));
-
-            if (isExist) {
-                System.out.println("The id is exist!");
-            } else {
-                return id;
-            }
-        } while (true);
-    }
-
-    /**
      * Inputs the details of the fruit.
      *
-     * @param fruits The list of existing fruits to ensure no duplicate IDs are
-     * entered
+     * @param id the unique id for fruit.
      */
-    public void input(List<Fruit> fruits) {
-        this.id = getId(fruits);
+    public void input(String id) {
+        this.id = id;
 
         this.name = Validate.getString(
                 "Enter name: ",

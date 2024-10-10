@@ -5,10 +5,12 @@
  */
 package bo;
 
+import constant.IConstant;
 import entity.Fruit;
 import java.util.ArrayList;
 import java.util.List;
 import util.Helper;
+import util.Validate;
 
 /**
  *
@@ -42,7 +44,7 @@ public class FruitBO {
         do {
             Fruit f = new Fruit();
 
-            f.input(fruits);
+            f.input(generateId());
 
             fruits.add(f);
         } while (Helper.isContinue());
@@ -56,5 +58,31 @@ public class FruitBO {
         for (int i = 0; i < fruits.size(); i++) {
             fruits.get(i).display(i + 1);
         }
+    }
+    
+    /**
+     * Retrieves a unique ID for the fruit from the user. Ensures that the ID
+     * does not already exist in the provided list of fruits.
+     *
+     * @param fruits The list of existing fruits to check for duplicate IDs
+     * @return A unique ID entered by the user
+     */
+    private String generateId() {
+        do {
+            String id = Validate.getString(
+                    "Enter id: ",
+                    IConstant.STRING_MES,
+                    IConstant.REGEX_ID
+            );
+
+            boolean isExist = this.fruits.stream()
+                                         .anyMatch(f -> f.getId().equals(id));
+
+            if (isExist) {
+                System.out.println("The id is exist!");
+            } else {
+                return id;
+            }
+        } while (true);
     }
 }
