@@ -24,17 +24,33 @@ public class Helper {
      */
     public static int getCurrentYear() {
         return Calendar.getInstance().get(Calendar.YEAR);
-    } 
-    
+    }
+
     /**
      * Display menu for user to choose.
      */
     public static void menu() {
-        System.out.println("\n========= Fruit Shopping =========");
-        System.out.println("1. Add fruit");
-        System.out.println("2. View orders");
-        System.out.println("3. Shopping (for buyer)");
+        System.out.println("\n========= CANDIDATE MANAGEMENT =========");
+        System.out.println("1. Experience");
+        System.out.println("2. Fresher");
+        System.out.println("3. Internship");
+        System.out.println("4. Search");
         System.out.println("5. Exit");
+    }
+
+    public static void menuOfCandidateType() {
+        System.out.println("\n========= TYPE =========");
+        System.out.println("1. Experience");
+        System.out.println("2. Fresher");
+        System.out.println("3. Internship");
+    }
+
+    public static void menuOfRank() {
+        System.out.println("\n========= Rank =========");
+        System.out.println("1. Excellence");
+        System.out.println("2. Good");
+        System.out.println("3. Fair");
+        System.out.println("4. Poor");
     }
 
     /**
