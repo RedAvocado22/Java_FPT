@@ -5,9 +5,7 @@
  */
 package entity;
 
-import bo.FruitBO;
 import constant.IConstant;
-import java.util.List;
 import util.Validate;
 
 /**
