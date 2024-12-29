@@ -8,10 +8,8 @@ package main;
 import bo.HistoryBO;
 import bo.WorkerBO;
 import constant.IConstant;
-import entity.History;
 import entity.Worker;
 import java.util.ArrayList;
-import java.util.List;
 import mock.Data;
 import util.Helper;
 import util.Validate;
@@ -26,9 +24,7 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        List<Worker> workers = Data.workers;
-
-        WorkerBO workerBo = new WorkerBO(workers);
+        WorkerBO workerBo = new WorkerBO(Data.workers);
         HistoryBO historyBo = new HistoryBO(new ArrayList());
 
         do {
