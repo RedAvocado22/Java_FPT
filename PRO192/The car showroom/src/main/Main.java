@@ -25,7 +25,7 @@ public class Main {
 
     BrandBo brandBo = new BrandBo(new ArrayList<>());
     CarBo carBo = new CarBo(new ArrayList<>());
-    
+
     Menu menu = new Menu("Car showroom Managerment!");
     menu.addNewOption("1.  List all brand.");
     menu.addNewOption("2.  Add a new brand.");
@@ -45,17 +45,17 @@ public class Main {
     menuUpdateBrand.addNewOption("1. Update brand's name.");
     menuUpdateBrand.addNewOption("2. Update sound brand.");
     menuUpdateBrand.addNewOption("3. Update price.");
-    
+
     Menu menuUpdateCar = new Menu("Update car");
     menuUpdateCar.addNewOption("1. Update car's brand.");
     menuUpdateCar.addNewOption("2. Update car's color.");
     menuUpdateCar.addNewOption("3. Update car's frame.");
     menuUpdateCar.addNewOption("4. Update car's engine.");
-    
+
     do {
       menu.printMenu();
       choice = menu.getChoice();
-      
+
       switch (choice) {
         case 1:
           brandBo.display();
@@ -65,31 +65,31 @@ public class Main {
           carBo.setBrandList(brandBo.exportBrandList());
           break;
         case 3:
-          id = Validate.getString (
-            "Enter brand's id need to find: ", 
-            "Invalidated ID", 
-            IConstant.REGEX_BRAND_ID
+          id = Validate.getString(
+                  "Enter brand's id need to find: ",
+                  "Invalidated ID",
+                  IConstant.REGEX_BRAND_ID
           );
-          
+
           index = brandBo.searchID(id);
-          if(index == -1) {
+          if (index == -1) {
             System.out.println("Not found!");
           } else {
-            if(Helper.isContinue("Do you want to print the brand has found?")) {
+            if (Helper.isContinue("Do you want to print the brand has found?")) {
               brandBo.displayOne(index);
             }
           }
           break;
         case 4:
-          id = Validate.getString (
-            "Enter brand's id need to update: ", 
-            "Invalidated ID", 
-            IConstant.REGEX_BRAND_ID
+          id = Validate.getString(
+                  "Enter brand's id need to update: ",
+                  "Invalidated ID",
+                  IConstant.REGEX_BRAND_ID
           );
-          
+
           index = brandBo.searchID(id);
-          
-          if(index < 0) {
+
+          if (index < 0) {
             System.out.println("Brand ID not exist!");
             break;
           }
@@ -112,7 +112,7 @@ public class Main {
           carBo.setBrandList(brandBo.exportBrandList());
           break;
         case 5:
-          if(brandBo.loadFromFile()) {
+          if (brandBo.loadFromFile()) {
             carBo.setBrandList(brandBo.exportBrandList());
             System.out.println("Take data from file successful!");
           } else {
@@ -120,7 +120,7 @@ public class Main {
           }
           break;
         case 6:
-          if(brandBo.saveToFile()) {
+          if (brandBo.saveToFile()) {
             System.out.println("Save data to file successful!");
           } else {
             System.out.println("An error occurred! Can't save data!");
@@ -136,7 +136,7 @@ public class Main {
         case 9:
           index = carBo.search(IConstant.TYPE_ID);
 
-          if(index < 0) {
+          if (index < 0) {
             System.out.println("The car not exist!");
           } else {
             System.out.println("Here is the car you want to remove: ");
@@ -150,12 +150,12 @@ public class Main {
           break;
         case 10:
           index = carBo.search(IConstant.TYPE_ID);
-          
+
           if (index < 0) {
             System.out.println("The car isn't exist!");
             break;
           }
-          
+
           do {
             menuUpdateCar.printMenu();
             choice = menuUpdateCar.getChoice();
@@ -172,18 +172,18 @@ public class Main {
               case 4:
                 carBo.update(IConstant.TYPE_ENGINE, index);
                 break;
-            } 
+            }
           } while (Helper.isContinue("Do you want to keep update this car?"));
           break;
         case 11:
-          if(carBo.loadFromFile()) {
+          if (carBo.loadFromFile()) {
             System.out.println("Take data from file successful!");
           } else {
             System.out.println("An error occurred! Can't take data!");
           }
           break;
         case 12:
-          if(carBo.saveToFile()) {
+          if (carBo.saveToFile()) {
             System.out.println("Save data to file successful!");
           } else {
             System.out.println("An error occurred! Can't save data!");

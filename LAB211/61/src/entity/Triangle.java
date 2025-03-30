@@ -82,7 +82,7 @@ public class Triangle extends Shape {
                 this.sideC = c;
                 check = false;
             } else {
-                System.out.println("Try again! The triangle not exsit!");
+                System.out.println("Try again! The triangle not exist!");
                 check = true;
             }
         } while (check);

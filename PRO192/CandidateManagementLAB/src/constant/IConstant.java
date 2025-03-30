@@ -10,7 +10,7 @@ package constant;
  * @author Admin
  */
 public interface IConstant {
-        String REGEX_NAME = "^[A-Za-z ]+$";
+	String REGEX_NAME = "^[A-Za-z ]+$";
 	String REGEX_PHONE_NUMBER = "^[0-9]{10,}$";
 	String REGEX_EMAIL = "^[\\w-\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
 	String REGEX_ADDRESS = "^[A-Za-z0-9 ,\\-\\./]+$";

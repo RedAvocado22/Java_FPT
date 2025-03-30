@@ -1,0 +1,53 @@
+
+.container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px; /* Giới hạn chiều rộng tối đa */
+    margin: 0 auto; /* Căn giữa nội dung */
+}
+
+/* Bộ lọc chiếm 2 phần */
+.filter {
+    flex: 2;
+    background: #f2f2f2;
+    padding: 15px;
+    border-radius: 5px;
+    height: fit-content;
+}
+
+/* Điều chỉnh danh sách bộ lọc */
+.filter h3 {
+    margin-top: 0;
+}
+
+.filter ul {
+    list-style: none;
+    padding: 0;
+}
+
+.filter li {
+    margin-bottom: 10px;
+}
+
+/* Danh sách sách chiếm 8 phần */
+.book-container {
+    flex: 8;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start;
+}
+
+/* Thiết lập từng mục sách */
+.book-item {
+    width: 150px;
+    text-align: center;
+}
+
+.book-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
