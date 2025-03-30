@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Staff Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 24px;
+        }
+
+        .form-container {
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 500px;
+            margin-bottom: 20px;
+            justify-self: center;
+        }
+
+        .form-container table {
+            width: 100%;
+        }
+
+        .form-container td {
+            padding: 10px 0;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .form-container input[type="tel"], .form-container select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 4px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .form-container button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #218838;
+        }
+
+        .result-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-table thead {
+            background-color: #17a2b8;
+            color: #ffffff;
+        }
+
+        .result-table th, .result-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .result-table td a {
+            color: #dc3545;
+            text-decoration: none;
+        }
+
+        .result-table td a:hover {
+            text-decoration: underline;
+        }
+
+        .text-success {
+            color: green;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+
+        .error ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        .error li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <!--/*@thymesVar id="staffDTO" type=""*/-->
+    <form th:action="@{/postmethod}" th:method="post" th:object="${staffDTO}">
+        <h2>Staff Management</h2>
+        <div class="text-success col-auto" th:text="${mess}"></div>
+        <table>
+            <tr>
+                <td>Staff name:</td>
+                <td><input th:field="*{name}" type="text"/></td> <!-- Correct binding -->
+                <div th:if="${#fields.hasErrors('name')}" class="error">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('name')}" th:text="${err}"></li>
+                    </ul>
+                </div>
+            </tr>
+            <tr>
+                <td>Age:</td>
+                <td><input th:field="*{age}" type="number"/></td>
+                <div th:if="${#fields.hasErrors('age')}" class="error">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('age')}" th:text="${err}"></li>
+                    </ul>
+                </div>
+            </tr>
+            <tr>
+                <td>Address:</td>
+                <td><input th:field="*{address}" type="text"/></td>
+                <div th:if="${#fields.hasErrors('address')}" class="error">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('address')}" th:text="${err}"></li>
+                    </ul>
+                </div>
+            </tr>
+            <tr>
+                <td>Department:</td>
+                <td>
+                    <select th:field="*{department}">
+                        <option th:each="dep : ${departmentList}"
+                                th:value="${dep}"
+                                th:text="${dep}"></option>
+                    </select>
+                    <div th:if="${#fields.hasErrors('department')}" class="error">
+                        <ul>
+                            <li th:each="err : ${#fields.errors('department')}" th:text="${err}"></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: right;">
+                    <button type="submit">Add New</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<div>
+    <table class="result-table">
+        <thead>
+        <tr>
+            <th># No</th>
+            <th>Staff Name</th>
+            <th>Department</th>
+            <th>Address</th>
+            <th>Age</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody th:each="item, stat: ${staffDTOList}">
+        <tr>
+            <td><span th:text="${stat.index + 1}"></span></td>
+            <td><span th:text="${item.getName()}"></span></td>
+            <td><span th:text="${item.getDepartment()}"></span></td>
+            <td><span th:text="${item.getAddress()}"></span></td>
+            <td><span th:text="${item.getAge()}"></span></td>
+            <td>
+                <a href="#" th:onclick="'confirmDelete(event, \'/PE2025/delete/' + ${item.getId()} + '\')'">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script>
+    function confirmDelete(event, url) {
+        event.preventDefault();
+        const isConfirmed = confirm("Are you sure you want to delete this item?");
+        if (isConfirmed) {
+            window.location.href = url;
+        }
+    }
+</script>
+</body>
+</html>
